@@ -202,7 +202,7 @@ powershell -File tools\verify.ps1
 powershell -File tools\verify.ps1 -Deploy
 
 # 单独跑
-dotnet build NewsanguoAutoAnthonyAdapter.csproj -c Release --no-incremental /p:DeployToMods=true
+dotnet build Auto-Anthonyology-Newsanguo.csproj -c Release --no-incremental /p:DeployToMods=true
 dotnet run --project tools\SmokeTest -- bin\Release\autoanthony_newsanguo.dll
 python tools\derive_catalog.py --emit          # 反推 + 生成壳（改原子后必跑）
 python tools\derive_catalog.py --min-rate 54   # 覆盖率断言

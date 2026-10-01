@@ -5,11 +5,21 @@ using System.Runtime.Loader;
 
 const string GameDir = @"E:\Program Files (x86)\Steam\steamapps\common\Slay the Spire 2\data_sts2_windows_x86_64";
 const string ModsDir = @"E:\Program Files (x86)\Steam\steamapps\common\Slay the Spire 2\mods";
-const string AutoAnthonyRef = @"E:\games\杀戮尖塔2\NewsanguoAutoAnthonyAdapter\refs\AutoAnthony.dll";
+// 仓库根从**可执行文件位置**向上找（含 src/ 的那一层）—— 目录名改过、换机器都不用改代码。
+// 之前这里硬编码了绝对路径，导致工作区目录一改名，冒烟检查就找不到 DLL。
+static string FindRepoRoot()
+{
+    var d = new DirectoryInfo(AppContext.BaseDirectory);
+    while (d is not null && !Directory.Exists(Path.Combine(d.FullName, "src"))) d = d.Parent;
+    return d?.FullName ?? throw new InvalidOperationException("找不到仓库根：向上没有含 src/ 的目录");
+}
+
+var repoRoot = FindRepoRoot();
+var AutoAnthonyRef = Path.Combine(repoRoot, "refs", "AutoAnthony.dll");
 
 var target = args.Length > 0
     ? args[0]
-    : @"E:\games\杀戮尖塔2\NewsanguoAutoAnthonyAdapter\bin\Release\autoanthony_newsanguo.dll";
+    : Path.Combine(repoRoot, "bin", "Release", "autoanthony_newsanguo.dll");
 
 var probeDirs = new[]
 {

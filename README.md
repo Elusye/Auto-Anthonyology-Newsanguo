@@ -49,7 +49,7 @@
 ## 目录结构
 
 ```
-NewsanguoAutoAnthonyAdapter.csproj   构建定义（只编译 src/**）
+Auto-Anthonyology-Newsanguo.csproj   构建定义（只编译 src/**）
 autoanthony_newsanguo.json            mod 清单（id 必须与程序集名一致）
 refs/AutoAnthony.dll                  编译参考：AA 0.3.104（本地从源码构建）
 src/
@@ -74,9 +74,9 @@ dist/                    /p:PackageMod=true 产出的安装目录（可整目录
 以及《杀戮尖塔 2》与已安装的 `newsanguo`、`STS2-RitsuLib`。
 
 ```powershell
-dotnet build NewsanguoAutoAnthonyAdapter.csproj -c Release
+dotnet build Auto-Anthonyology-Newsanguo.csproj -c Release
 # 若要指定游戏目录：
-dotnet build NewsanguoAutoAnthonyAdapter.csproj -c Release /p:Sts2Dir="E:\...\Slay the Spire 2"
+dotnet build Auto-Anthonyology-Newsanguo.csproj -c Release /p:Sts2Dir="E:\...\Slay the Spire 2"
 ```
 
 产物：`bin\Release\autoanthony_newsanguo.dll`。
@@ -84,14 +84,14 @@ dotnet build NewsanguoAutoAnthonyAdapter.csproj -c Release /p:Sts2Dir="E:\...\Sl
 只需要一份目录产物（不碰游戏目录），用于检查安装布局或手动投放：
 
 ```powershell
-dotnet build NewsanguoAutoAnthonyAdapter.csproj -c Release /p:PackageMod=true
+dotnet build Auto-Anthonyology-Newsanguo.csproj -c Release /p:PackageMod=true
 # -> dist\autoanthony_newsanguo\{autoanthony_newsanguo.dll, autoanthony_newsanguo.json}
 ```
 
 部署到游戏（默认关闭，因为目标在会话工作区之外）：
 
 ```powershell
-dotnet build NewsanguoAutoAnthonyAdapter.csproj -c Release /p:DeployToMods=true
+dotnet build Auto-Anthonyology-Newsanguo.csproj -c Release /p:DeployToMods=true
 ```
 
 即复制到 `mods\autoanthony_newsanguo\`（`autoanthony_newsanguo.dll` + `autoanthony_newsanguo.json`）。

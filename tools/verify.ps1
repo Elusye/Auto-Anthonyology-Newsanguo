@@ -31,7 +31,7 @@ function Step($name, [scriptblock]$body) {
 }
 
 Step "1/4 构建" {
-    $args = @("build", "$root\NewsanguoAutoAnthonyAdapter.csproj", "-c", "Release", "-v", "minimal", "--no-incremental")
+    $args = @("build", "$root\Auto-Anthonyology-Newsanguo.csproj", "-c", "Release", "-v", "minimal", "--no-incremental")
     if ($Deploy) { $args += "/p:DeployToMods=true" }
     dotnet @args 2>&1 | Select-String -Pattern 'error|warning CS|Deploying|已成功|失败' | Select-Object -First 8
 }

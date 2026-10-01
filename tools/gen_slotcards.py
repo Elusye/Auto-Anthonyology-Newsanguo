@@ -1,6 +1,8 @@
 import os
 
-OUT = r"E:\games\杀戮尖塔2\NewsanguoAutoAnthonyAdapter\src\SlotCards.cs"
+# 从脚本自身位置推导仓库根 —— 不硬编码绝对路径（工作区目录改名后不会失效）
+_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUT = os.path.join(_ROOT, "src", "SlotCards.cs")
 
 # 稀有度计划与 newsanguo 0.2.38 实际池成员一致（除 2 张 Ancient 由手工保留）：
 #   Basic 10（承担初始牌组：10 槽 × 1 张 = 10 张开局牌）
