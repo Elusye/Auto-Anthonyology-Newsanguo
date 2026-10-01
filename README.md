@@ -1,4 +1,4 @@
-# 新三国 × 东尼算法（newsanguo_autoanthony）
+# Auto-Anthonyology Newsanguo（mod id: `newsanguo_autoanthony`）
 
 > **职责边界**：本文件只讲**怎么用**（构建、部署、工具、依赖）。
 > 当前规模、扩展模式、决策与**踩过的坑**见 [docs/STATUS.md](docs/STATUS.md) ——

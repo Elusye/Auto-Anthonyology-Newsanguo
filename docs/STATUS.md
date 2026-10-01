@@ -5,8 +5,12 @@
 
 ## 一句话
 
-独立 mod `newsanguo_autoanthony`：把**东尼算法（AutoAnthony）**的随机卡池接到 **newsanguo** 角色上，
-完全复刻旧实现的行为（整池接管 + 替换初始牌组）。
+**Auto-Anthonyology Newsanguo**（mod id `newsanguo_autoanthony`）：把**东尼算法（AutoAnthony）**的随机卡池
+接到 **newsanguo** 角色上，完全复刻旧实现的行为（整池接管 + 替换初始牌组）。
+
+> 名字分两层，别混：**显示名**是 `Auto-Anthonyology Newsanguo`（清单 `name`、README 标题），
+> **技术标识**仍是 `newsanguo_autoanthony`（mod id / 程序集名 / 部署目录 / 清单文件名）。
+> 后者改了游戏会当成**另一个 mod**（加载器按 `<清单 id>.dll` 发现程序集），所以没有一起改。
 
 ## 当前规模
 

@@ -1,7 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <!--
-    新三国 × 东尼算法（AutoAnthony）独立适配器 mod。
+    Auto-Anthonyology Newsanguo —— 东尼算法（AutoAnthony）× 新三国 的独立适配器 mod。
+    （显示名 = Auto-Anthonyology Newsanguo；技术标识仍是 newsanguo_autoanthony，见下方 AssemblyName）
 
     这是一个**独立 mod**：不修改 newsanguo 源码，通过
       · 编译期引用 newsanguo.dll（公开类型 NewsanguoCardPool / NewsanguoCharacter / NewsanguoPublicApi）
