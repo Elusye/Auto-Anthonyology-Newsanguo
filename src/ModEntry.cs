@@ -12,8 +12,8 @@ namespace Newsanguo.AutoAnthony;
 [ModInitializer(nameof(Init))]
 public static class ModEntry
 {
-    /// <summary>本 mod 的清单 id（newsanguo_autoanthony.json）。同时作为 RitsuLib 内容注册的归属 id。</summary>
-    public const string ModId = "newsanguo_autoanthony";
+    /// <summary>本 mod 的清单 id（autoanthony_newsanguo.json）。同时作为 RitsuLib 内容注册的归属 id。</summary>
+    public const string ModId = "autoanthony_newsanguo";
 
     /// <summary>
     /// 游戏内日志器。注意：创建它需要 Godot 运行时（sts2 的 Logger 静态构造会读 Godot 命令行），

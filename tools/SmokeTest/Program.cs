@@ -9,7 +9,7 @@ const string AutoAnthonyRef = @"E:\games\杀戮尖塔2\NewsanguoAutoAnthonyAdapt
 
 var target = args.Length > 0
     ? args[0]
-    : @"E:\games\杀戮尖塔2\NewsanguoAutoAnthonyAdapter\bin\Release\newsanguo_autoanthony.dll";
+    : @"E:\games\杀戮尖塔2\NewsanguoAutoAnthonyAdapter\bin\Release\autoanthony_newsanguo.dll";
 
 var probeDirs = new[]
 {
@@ -144,7 +144,7 @@ Console.WriteLine($"assembly = {asm.GetName().Name} {asm.GetName().Version}");
 Console.WriteLine();
 
 Console.WriteLine("[1] 程序集命名须与清单 id 一致（加载器按 <id>.dll 发现）");
-Check(asm.GetName().Name == "newsanguo_autoanthony", "assembly name == newsanguo_autoanthony", asm.GetName().Name);
+Check(asm.GetName().Name == "autoanthony_newsanguo", "assembly name == autoanthony_newsanguo", asm.GetName().Name);
 
 Console.WriteLine("[2] [ModInitializer] 入口");
 var initAttr = SafeTypes(asm).SelectMany(t => t.GetCustomAttributes())

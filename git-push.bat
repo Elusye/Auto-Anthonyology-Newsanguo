@@ -3,7 +3,7 @@ setlocal enabledelayedexpansion
 cd /d "%~dp0"
 
 rem Usage: git-push.bat ["commit message"]   (default message below if omitted)
-set "MSG=Update newsanguo_autoanthony"
+set "MSG=Update autoanthony_newsanguo"
 if not "%~1"=="" set "MSG=%~1"
 
 rem NOTE: keep this file ASCII-only.

@@ -38,7 +38,7 @@ Step "1/4 构建" {
 
 Step "2/4 冒烟检查（48 项 + 12 种子）" {
     $out = dotnet run --project "$root\tools\SmokeTest\SmokeTest.csproj" -c Release -- `
-        "$root\bin\Release\newsanguo_autoanthony.dll" 2>&1
+        "$root\bin\Release\autoanthony_newsanguo.dll" 2>&1
     $p = ($out | Select-String -Pattern '^\s+PASS').Count
     $f = ($out | Select-String -Pattern '^\s+FAIL').Count
     Write-Host "  PASS=$p FAIL=$f"

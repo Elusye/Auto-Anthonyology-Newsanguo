@@ -2,7 +2,7 @@
 
   <!--
     Auto-Anthonyology Newsanguo —— 东尼算法（AutoAnthony）× 新三国 的独立适配器 mod。
-    （显示名 = Auto-Anthonyology Newsanguo；技术标识仍是 newsanguo_autoanthony，见下方 AssemblyName）
+    （显示名与技术标识统一为 Auto-Anthonyology Newsanguo / autoanthony_newsanguo）
 
     这是一个**独立 mod**：不修改 newsanguo 源码，通过
       · 编译期引用 newsanguo.dll（公开类型 NewsanguoCardPool / NewsanguoCharacter / NewsanguoPublicApi）
@@ -16,7 +16,7 @@
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <!-- 必须与清单 id 一致：游戏 mod 加载器按 <id>.dll 约定发现程序集 -->
-    <AssemblyName>newsanguo_autoanthony</AssemblyName>
+    <AssemblyName>autoanthony_newsanguo</AssemblyName>
     <RootNamespace>Newsanguo.AutoAnthony</RootNamespace>
     <LangVersion>13.0</LangVersion>
     <Nullable>enable</Nullable>
@@ -80,21 +80,21 @@
        需要时用 /p:PackageMod=true 开启。 -->
   <Target Name="PackageMod" AfterTargets="Build" Condition="'$(PackageMod)' == 'true'">
     <PropertyGroup>
-      <PackageDir>$(MSBuildProjectDirectory)\dist\newsanguo_autoanthony</PackageDir>
+      <PackageDir>$(MSBuildProjectDirectory)\dist\autoanthony_newsanguo</PackageDir>
     </PropertyGroup>
     <Message Text="Packaging install folder: $(PackageDir)" Importance="high" />
     <MakeDir Directories="$(PackageDir)" />
     <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(PackageDir)\" />
-    <Copy SourceFiles="$(MSBuildProjectDirectory)\newsanguo_autoanthony.json" DestinationFolder="$(PackageDir)\" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\autoanthony_newsanguo.json" DestinationFolder="$(PackageDir)\" />
   </Target>
 
-  <!-- 构建后把 DLL + manifest 复制到 mods\newsanguo_autoanthony\。
+  <!-- 构建后把 DLL + manifest 复制到 mods\autoanthony_newsanguo\。
        默认关闭（部署目标在会话工作区之外）：需要时用 /p:DeployToMods=true 显式开启。 -->
   <Target Name="DeployToMods" AfterTargets="Build" Condition="'$(DeployToMods)' == 'true'">
-    <Message Text="Deploying adapter to $(ModsDir)\newsanguo_autoanthony\ ..." Importance="high" />
-    <MakeDir Directories="$(ModsDir)\newsanguo_autoanthony" />
-    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModsDir)\newsanguo_autoanthony\" />
-    <Copy SourceFiles="$(MSBuildProjectDirectory)\newsanguo_autoanthony.json" DestinationFolder="$(ModsDir)\newsanguo_autoanthony\" />
+    <Message Text="Deploying adapter to $(ModsDir)\autoanthony_newsanguo\ ..." Importance="high" />
+    <MakeDir Directories="$(ModsDir)\autoanthony_newsanguo" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModsDir)\autoanthony_newsanguo\" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\autoanthony_newsanguo.json" DestinationFolder="$(ModsDir)\autoanthony_newsanguo\" />
   </Target>
 
 </Project>

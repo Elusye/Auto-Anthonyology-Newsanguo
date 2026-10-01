@@ -1,4 +1,4 @@
-# Auto-Anthonyology Newsanguo（mod id: `newsanguo_autoanthony`）
+# Auto-Anthonyology Newsanguo（mod id: `autoanthony_newsanguo`）
 
 > **职责边界**：本文件只讲**怎么用**（构建、部署、工具、依赖）。
 > 当前规模、扩展模式、决策与**踩过的坑**见 [docs/STATUS.md](docs/STATUS.md) ——
@@ -48,7 +48,7 @@
 
 ```
 NewsanguoAutoAnthonyAdapter.csproj   构建定义（只编译 src/**）
-newsanguo_autoanthony.json            mod 清单（id 必须与程序集名一致）
+autoanthony_newsanguo.json            mod 清单（id 必须与程序集名一致）
 refs/AutoAnthony.dll                  编译参考：AA 0.3.104（本地从源码构建）
 src/
   ModEntry.cs            [ModInitializer] 入口 + 日志
@@ -77,13 +77,13 @@ dotnet build NewsanguoAutoAnthonyAdapter.csproj -c Release
 dotnet build NewsanguoAutoAnthonyAdapter.csproj -c Release /p:Sts2Dir="E:\...\Slay the Spire 2"
 ```
 
-产物：`bin\Release\newsanguo_autoanthony.dll`。
+产物：`bin\Release\autoanthony_newsanguo.dll`。
 
 只需要一份目录产物（不碰游戏目录），用于检查安装布局或手动投放：
 
 ```powershell
 dotnet build NewsanguoAutoAnthonyAdapter.csproj -c Release /p:PackageMod=true
-# -> dist\newsanguo_autoanthony\{newsanguo_autoanthony.dll, newsanguo_autoanthony.json}
+# -> dist\autoanthony_newsanguo\{autoanthony_newsanguo.dll, autoanthony_newsanguo.json}
 ```
 
 部署到游戏（默认关闭，因为目标在会话工作区之外）：
@@ -92,13 +92,13 @@ dotnet build NewsanguoAutoAnthonyAdapter.csproj -c Release /p:PackageMod=true
 dotnet build NewsanguoAutoAnthonyAdapter.csproj -c Release /p:DeployToMods=true
 ```
 
-即复制到 `mods\newsanguo_autoanthony\`（`newsanguo_autoanthony.dll` + `newsanguo_autoanthony.json`）。
-**注意**：游戏 mod 加载器按 `<清单 id>.dll` 约定发现程序集，所以程序集名必须保持 `newsanguo_autoanthony`。
+即复制到 `mods\autoanthony_newsanguo\`（`autoanthony_newsanguo.dll` + `autoanthony_newsanguo.json`）。
+**注意**：游戏 mod 加载器按 `<清单 id>.dll` 约定发现程序集，所以程序集名必须保持 `autoanthony_newsanguo`。
 
 冒烟检查：
 
 ```powershell
-dotnet run --project tools\SmokeTest\SmokeTest.csproj -c Release -- bin\Release\newsanguo_autoanthony.dll
+dotnet run --project tools\SmokeTest\SmokeTest.csproj -c Release -- bin\Release\autoanthony_newsanguo.dll
 ```
 
 ---
@@ -151,9 +151,9 @@ Common/Uncommon/Rare 与手工卡数量对齐，接管后稀有度分布不变�
 - **卡池成员数已对二进制核实**：已安装的 `newsanguo.dll` 里注册进 `NewsanguoCardPool` 的卡 = **92**
   （2 张先古 + **90 张可接管替换**），与源码扫描及 96 槽计划一致。
 - **跨 mod 注册已实机确认可行**：首次实机运行日志里出现了
-  `Registered 96 slot cards into NewsanguoCardPool (modId=newsanguo_autoanthony).`
+  `Registered 96 slot cards into NewsanguoCardPool (modId=autoanthony_newsanguo).`
 - **安装布局已核实并已部署**：清单 `id` 与程序集名一致、依赖版本与实际安装版本匹配；
-  已部署到 `mods\newsanguo_autoanthony\`，且部署的 DLL 与本地构建产物 SHA-256 一致。
+  已部署到 `mods\autoanthony_newsanguo\`，且部署的 DLL 与本地构建产物 SHA-256 一致。
 
 ### 实机卡死（已修复）
 
@@ -320,8 +320,8 @@ handler 都在 [src/RuntimeRoutes.cs](src/RuntimeRoutes.cs)，路由在 `Runtime
 所以重新生成是可复现的两步（原先放在临时目录，被清理后生成器就跑不动了）：
 
 ```powershell
-dotnet run --project tools\SmokeTest -- bin\Release\newsanguo_autoanthony.dll --extract-embedded refs\aa-catalog
-dotnet run --project tools\SmokeTest -- bin\Release\newsanguo_autoanthony.dll --dump-ironclad-atoms > refs\aa-catalog\runtime-atoms.tsv
+dotnet run --project tools\SmokeTest -- bin\Release\autoanthony_newsanguo.dll --extract-embedded refs\aa-catalog
+dotnet run --project tools\SmokeTest -- bin\Release\autoanthony_newsanguo.dll --dump-ironclad-atoms > refs\aa-catalog\runtime-atoms.tsv
 python tools\gen_extra_atoms.py refs\aa-catalog refs\aa-catalog\runtime-atoms.tsv
 ```
 

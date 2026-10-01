@@ -5,12 +5,13 @@
 
 ## 一句话
 
-**Auto-Anthonyology Newsanguo**（mod id `newsanguo_autoanthony`）：把**东尼算法（AutoAnthony）**的随机卡池
+**Auto-Anthonyology Newsanguo**（mod id `autoanthony_newsanguo`）：把**东尼算法（AutoAnthony）**的随机卡池
 接到 **newsanguo** 角色上，完全复刻旧实现的行为（整池接管 + 替换初始牌组）。
 
-> 名字分两层，别混：**显示名**是 `Auto-Anthonyology Newsanguo`（清单 `name`、README 标题），
-> **技术标识**仍是 `newsanguo_autoanthony`（mod id / 程序集名 / 部署目录 / 清单文件名）。
-> 后者改了游戏会当成**另一个 mod**（加载器按 `<清单 id>.dll` 发现程序集），所以没有一起改。
+> **改名历史**：原名 `newsanguo_autoanthony`，现名 **Auto-Anthonyology Newsanguo**。
+> 显示名与技术标识**都已同步改**为 `autoanthony_newsanguo`（mod id / 程序集名 / 部署目录 /
+> 清单文件名统一）。代价：对游戏而言这是**另一个 mod** —— 旧的 `mods\newsanguo_autoanthony\`
+> 必须删掉，否则两个 mod 会同时注册内容、互相冲突；旧存档里该 mod 的归属也可能认不出来。
 
 ## 当前规模
 
@@ -202,7 +203,7 @@ powershell -File tools\verify.ps1 -Deploy
 
 # 单独跑
 dotnet build NewsanguoAutoAnthonyAdapter.csproj -c Release --no-incremental /p:DeployToMods=true
-dotnet run --project tools\SmokeTest -- bin\Release\newsanguo_autoanthony.dll
+dotnet run --project tools\SmokeTest -- bin\Release\autoanthony_newsanguo.dll
 python tools\derive_catalog.py --emit          # 反推 + 生成壳（改原子后必跑）
 python tools\derive_catalog.py --min-rate 54   # 覆盖率断言
 python tools\derive_catalog.py --ab trigger_   # 单变量 A/B：某前缀原子对覆盖率的影响

@@ -1,11 +1,11 @@
 # newsanguo 公开 API 追加请求
 
-> 来源：`newsanguo_autoanthony`（东尼算法 × newsanguo 适配器）侧。
+> 来源：`autoanthony_newsanguo`（东尼算法 × newsanguo 适配器）侧。
 > 收件方无需了解适配器内部，按本文档实现即可。
 
 ## 背景
 
-- 独立 mod `newsanguo_autoanthony` 把东尼算法（AutoAnthony）的随机卡池接到 newsanguo 角色上。
+- 独立 mod `autoanthony_newsanguo` 把东尼算法（AutoAnthony）的随机卡池接到 newsanguo 角色上。
 - 它**硬引用 `newsanguo.dll`**，清单声明 `newsanguo >= 0.2.39`。
 - 原则：适配器**只调用 `NewsanguoPublicApi`**，不直接引用 `Scripts/Powers`、`Scripts/Combat`、
   `Scripts/Cards` 里的实现类型。那些虽然多数是 `public`，但不属于契约面 —— 一旦改名或挪命名空间，
