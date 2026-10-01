@@ -1,5 +1,7 @@
 # Auto-Anthonyology Newsanguo（mod id: `autoanthony_newsanguo`）
 
+仓库：<https://github.com/Elusye/Auto-Anthonyology-Newsanguo>
+
 > **职责边界**：本文件只讲**怎么用**（构建、部署、工具、依赖）。
 > 当前规模、扩展模式、决策与**踩过的坑**见 [docs/STATUS.md](docs/STATUS.md) ——
 > 两边都写状态一定会漂移（已经漂移过一次）。
