@@ -1,0 +1,99 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    新三国 × 东尼算法（AutoAnthony）独立适配器 mod。
+
+    这是一个**独立 mod**：不修改 newsanguo 源码，通过
+      · 编译期引用 newsanguo.dll（公开类型 NewsanguoCardPool / NewsanguoCharacter / NewsanguoPublicApi）
+      · Harmony 补丁挂钩 sts2 核心 CardPoolModel.FilterThroughEpochs 与 NewsanguoCharacter 初始牌组
+      · RitsuLib 的内容注册把 94 个固定卡槽注册进 newsanguo 的卡池
+    实现“整池接管 + 替换初始牌组”。
+
+    只编译 src\**\*.cs；根目录下的 legacy\*.cs 与 _ref\ 下的 AA 源码仅供查阅。
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <!-- 必须与清单 id 一致：游戏 mod 加载器按 <id>.dll 约定发现程序集 -->
+    <AssemblyName>newsanguo_autoanthony</AssemblyName>
+    <RootNamespace>Newsanguo.AutoAnthony</RootNamespace>
+    <LangVersion>13.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>false</ImplicitUsings>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- 按需改成本机《杀戮尖塔 2》目录 -->
+    <Sts2Dir Condition="'$(Sts2Dir)' == ''">E:\Program Files (x86)\Steam\steamapps\common\Slay the Spire 2</Sts2Dir>
+    <Sts2DataDir>$(Sts2Dir)\data_sts2_windows_x86_64</Sts2DataDir>
+    <ModsDir>$(Sts2Dir)\mods</ModsDir>
+    <!-- RitsuLib 随游戏 mod 分发：API 在 compat\<gamever>\，共享件在 shared\ -->
+    <RitsuDir>$(ModsDir)\STS2-RitsuLib\compat\0.111.0</RitsuDir>
+    <RitsuSharedDir>$(ModsDir)\STS2-RitsuLib\shared</RitsuSharedDir>
+    <NewsanguoModDir>$(ModsDir)\newsanguo</NewsanguoModDir>
+    <RefsDir>$(MSBuildProjectDirectory)\refs</RefsDir>
+  </PropertyGroup>
+
+  <Target Name="VerifyRefs" BeforeTargets="ResolveAssemblyReferences">
+    <Error Condition="!Exists('$(Sts2DataDir)\sts2.dll')"
+           Text="找不到游戏程序集：$(Sts2DataDir)\sts2.dll。请用 /p:Sts2Dir=... 指定《杀戮尖塔 2》安装目录。" />
+    <Error Condition="!Exists('$(NewsanguoModDir)\newsanguo.dll')"
+           Text="找不到 newsanguo.dll：$(NewsanguoModDir)\newsanguo.dll。请先安装/构建 newsanguo mod。" />
+    <Error Condition="!Exists('$(RefsDir)\AutoAnthony.dll')"
+           Text="找不到 AutoAnthony.dll：$(RefsDir)\AutoAnthony.dll（东尼算法 0.3.104 的编译参考）。" />
+  </Target>
+
+  <ItemGroup>
+    <Compile Include="src\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- 游戏本体（Private=false：绝不随 mod 分发） -->
+    <Reference Include="sts2"><HintPath>$(Sts2DataDir)\sts2.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="GodotSharp"><HintPath>$(Sts2DataDir)\GodotSharp.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="0Harmony"><HintPath>$(Sts2DataDir)\0Harmony.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="SmartFormat"><HintPath>$(Sts2DataDir)\SmartFormat.dll</HintPath><Private>false</Private></Reference>
+
+    <!-- 东尼算法（编译参考；运行时由玩家安装） -->
+    <Reference Include="AutoAnthony"><HintPath>$(RefsDir)\AutoAnthony.dll</HintPath><Private>false</Private></Reference>
+
+    <!-- 被适配的角色 mod -->
+    <Reference Include="newsanguo"><HintPath>$(NewsanguoModDir)\newsanguo.dll</HintPath><Private>false</Private></Reference>
+
+    <!-- RitsuLib（随游戏 mod 分发的运行时，不进 mod 目录） -->
+    <Reference Include="STS2-RitsuLib"><HintPath>$(RitsuDir)\STS2-RitsuLib.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="STS2-RitsuLib.Runtime"><HintPath>$(RitsuDir)\STS2-RitsuLib.Runtime.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="STS2-RitsuLib.Shared"><HintPath>$(RitsuSharedDir)\STS2-RitsuLib.Shared.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="STS2-RitsuLib.Settings"><HintPath>$(RitsuSharedDir)\STS2-RitsuLib.Settings.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="STS2-RitsuLib.Ui"><HintPath>$(RitsuSharedDir)\STS2-RitsuLib.Ui.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+
+  <!-- 只组装一份可直接拖进 mods\ 的安装目录（dist\<id>\），不触碰游戏目录。
+       用于验证"可独立安装"的产物布局：/<id>.dll + <id>.json。
+       需要时用 /p:PackageMod=true 开启。 -->
+  <Target Name="PackageMod" AfterTargets="Build" Condition="'$(PackageMod)' == 'true'">
+    <PropertyGroup>
+      <PackageDir>$(MSBuildProjectDirectory)\dist\newsanguo_autoanthony</PackageDir>
+    </PropertyGroup>
+    <Message Text="Packaging install folder: $(PackageDir)" Importance="high" />
+    <MakeDir Directories="$(PackageDir)" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(PackageDir)\" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\newsanguo_autoanthony.json" DestinationFolder="$(PackageDir)\" />
+  </Target>
+
+  <!-- 构建后把 DLL + manifest 复制到 mods\newsanguo_autoanthony\。
+       默认关闭（部署目标在会话工作区之外）：需要时用 /p:DeployToMods=true 显式开启。 -->
+  <Target Name="DeployToMods" AfterTargets="Build" Condition="'$(DeployToMods)' == 'true'">
+    <Message Text="Deploying adapter to $(ModsDir)\newsanguo_autoanthony\ ..." Importance="high" />
+    <MakeDir Directories="$(ModsDir)\newsanguo_autoanthony" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModsDir)\newsanguo_autoanthony\" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\newsanguo_autoanthony.json" DestinationFolder="$(ModsDir)\newsanguo_autoanthony\" />
+  </Target>
+
+</Project>

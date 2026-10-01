@@ -1,0 +1,16 @@
+{
+  "id": "newsanguo_autoanthony",
+  "name": "新三国 × 东尼算法",
+  "author": "U_Light",
+  "description": "让「新三国」角色接入东尼算法：整池接管（手工卡退出获取池）+ 初始牌组替换为随机生成的基础卡。",
+  "version": "0.1.0",
+  "min_game_version": "0.111.0",
+  "has_pck": false,
+  "has_dll": true,
+  "dependencies": [
+    { "id": "STS2-RitsuLib", "min_version": "0.6.2" },
+    { "id": "newsanguo", "min_version": "0.2.39" },
+    { "id": "AutoAnthony", "min_version": "0.3.104" }
+  ],
+  "affects_gameplay": true
+}

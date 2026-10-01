@@ -1,0 +1,18 @@
+# 构建产物
+bin/
+obj/
+dist/
+*.user
+.vs/
+
+# 东尼算法（AA）的第三方内容：源码、目录数据、程序集，都不进仓库。
+#   · _ref/                        解包出来的 AA 源码（约 12MB）
+#   · refs/aa-catalog/             AA 的内嵌目录（约 4MB）
+#   · refs/*.dll                   AA 程序集
+# 生成器需要时按 README 的两步重新导出。
+_ref/
+refs/aa-catalog/
+refs/*.dll
+
+# 本地备份（STATUS 里提到的还原点）
+backup/

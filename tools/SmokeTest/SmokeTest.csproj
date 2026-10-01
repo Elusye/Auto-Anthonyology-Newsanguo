@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <!-- 仅测试宿主：用本机已装的 .NET 10 运行（它只是反射加载 net9.0 产物，不需要 .NET 9 运行时） -->
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>SmokeTest</AssemblyName>
+  </PropertyGroup>
+</Project>

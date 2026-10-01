@@ -1,0 +1,136 @@
+自写目录原子清单：声明 56 个（实际组件 52 个，4 个因结构相同被 AA 合并）
+
+
+--- [自写 opcode] ns_add_cudgel ---
+  add_cudgel                         引用= 2  基线=colorless/finesse/1        将1张军杖加入你的手牌。
+
+--- [自写 opcode] ns_add_lightweight ---
+  add_lightweight                    引用= 2  基线=colorless/finesse/1        将1张不胜酒力加入你的弃牌堆。
+
+--- [自写 opcode] ns_add_soldier ---
+  add_soldier                        引用= 1  基线=colorless/finesse/1        将1张士兵加入你的手牌。
+
+--- [自写 opcode] ns_copy_to_hand ---
+  copy_to_hand                       引用= 1  基线=ironclad/anger/1           增加一张此牌的复制品到你的手牌。
+
+--- [自写 opcode] ns_draw_if_hand_eq ---
+  draw_if_hand_eq2                   引用= 2  基线=colorless/finesse/1        若你打出这张牌后恰好剩余两张手牌，则再抽2张牌。
+
+--- [自写 opcode] ns_energy_if_last_skill ---
+  energy_if_last_skill               引用= 1  基线=ironclad/bloodletting/1    若你打出的上一张牌是技能牌，获得2点能量。
+
+--- [自写 opcode] ns_entangled ---
+  entangled                          引用= 2  基线=ironclad/anger/1           本回合你不能打出攻击牌。
+
+--- [自写 opcode] ns_exhaust_na_heavens ---
+  exhaust_na_heavens                 引用= 2  基线=colorless/finesse/1        消耗手牌中的所有非攻击牌，每张获得2点天意之力。
+
+--- [自写 opcode] ns_exhume ---
+  exhume                             引用= 2  基线=ironclad/anger/1           从消耗牌堆中选择任意张牌放入手牌。
+
+--- [自写 opcode] ns_flight ---
+  flight                             引用= 2  基线=colorless/finesse/1        获得3层飞行。
+
+--- [自写 opcode] ns_frail ---
+  frail_target1                      引用= 1  基线=ironclad/mangle/1          给予目标1层脆弱。
+
+--- [自写 opcode] ns_frail_self ---
+  frail_self1                        引用= 1  基线=necrobinder/friendship/2   给予自身1层脆弱。
+
+--- [自写 opcode] ns_gain_heaven ---
+  heaven                             引用= 9  基线=ironclad/brand/2           获得1点天意之力。
+
+--- [自写 opcode] ns_gain_wine ---
+  wine                               引用= 5  基线=ironclad/brand/2           获得1点酒力。
+
+--- [自写 opcode] ns_hand_to_draw_top ---
+  hand_to_draw_top                   引用= 1  基线=ironclad/anger/1           将手牌中的一张牌放到抽牌堆的顶部，并且在其被打出之前其耗能变为0。
+
+--- [自写 opcode] ns_heaven_if_le ---
+  heaven_if_le2                      引用= 2  基线=colorless/finesse/1        若你的天意之力不大于二点，获得5点天意之力。
+
+--- [自写 opcode] ns_lose_heaven ---
+  lose_heaven2                       引用= 9  基线=ironclad/bloodwall/0       失去2点天意之力。
+
+--- [自写 opcode] ns_rebound ---
+  rebound                            引用= 2  基线=ironclad/anger/1           将你在本回合打出的下一张牌放置到你的抽牌堆顶部。
+
+--- [自写 opcode] ns_scry ---
+  scry7                              引用= 3  基线=colorless/finesse/1        预见7。
+
+--- [自写 opcode] ns_stun ---
+  stun                               引用= 2  基线=ironclad/anger/1           击晕该敌人。
+
+--- [自写 opcode] ns_stun_all_if_wine ---
+  stun_all_if_wine3                  引用= 1  基线=ironclad/anger/1           若你的酒力不小于三点：击晕所有敌人。
+
+--- [自写 opcode] ns_traitor_tyranny ---
+  traitor_tyranny                    引用= 2  基线=ironclad/anger/1           目标的易伤不会减少。
+
+--- [自写 opcode] ns_transform_soldier ---
+  transform_soldier                  引用= 2  基线=ironclad/anger/1           将你手牌中的任意张变化为士兵。
+
+--- [沿用官方 opcode] apply_power ---
+  retain_hand                        引用= 1  基线=colorless/equilibrium/1    在本回合保留你的手牌。
+  vuln_2                             引用= 5  基线=ironclad/bash/1            给予2层易伤。
+  weak_1                             引用= 4  基线=ironclad/uppercut/1        给予1层虚弱。
+  weak_all1                          引用= 1  基线=silent/haze/1              给予所有敌人1层虚弱。
+
+--- [沿用官方 opcode] condition ---
+  cond_cards_below3                  引用= 2  基线=defect/ftl/1               如果你在这回合打出的牌数小于3张，
+  cond_fatal                         引用= 1  基线=colorless/handofgreed/1    斩杀时，
+  cond_intends_attack                引用= 2  基线=defect/gofortheeyes/1      如果敌人的意图是攻击，
+
+--- [沿用官方 opcode] create_copy ---
+  copy_to_discard                    引用= 2  基线=ironclad/anger/1           将此牌的一张复制加入弃牌堆。
+
+--- [沿用官方 opcode] deal_damage ---
+  dmg11x3                            引用= 1  基线=regent/celestialmight/0    造成11点伤害3次。
+  dmg6x2                             引用= 2  基线=ironclad/fightme/0         造成6点伤害2次。
+  slash                              引用=28  基线=ironclad/anger/0           造成6点伤害。
+  strike_wave                        引用= 2  基线=ironclad/conflagration/0   对所有敌人造成2点伤害4次。
+  sweep_all                          引用= 4  基线=ironclad/breakthrough/1    对所有敌人造成9点伤害。
+
+--- [沿用官方 opcode] discard_card ---
+  discard_all                        引用= 2  基线=silent/shadowstep/0        丢弃所有手牌。
+
+--- [沿用官方 opcode] draw_cards ---
+  draw                               引用=13  基线=ironclad/battletrance/0    抽3张牌。
+
+--- [沿用官方 opcode] end_turn ---
+  end_turn                           引用= 2  基线=regent/voidform/0          结束你的回合。
+
+--- [沿用官方 opcode] exhaust_card ---
+  exhaust_choose                     引用= 2  基线=ironclad/brand/1           消耗手牌中的一张牌。
+  exhaust_non_attack                 引用= 1  基线=ironclad/secondwind/0      消耗手牌中的所有非攻击牌。
+
+--- [沿用官方 opcode] gain_block ---
+  guard                              引用=24  基线=ironclad/armaments/0       获得5点格挡。
+
+--- [沿用官方 opcode] gain_energy ---
+  energy                             引用= 6  基线=ironclad/bloodletting/1    获得2点能量。
+
+--- [沿用官方 opcode] lose_hp ---
+  hp_loss                            引用= 3  基线=ironclad/bloodwall/0       失去2点生命。
+
+--- [沿用官方 opcode] modify_hits ---
+  m_extra_hit                        引用= 1  基线=ironclad/dismantle/2       这张牌额外造成1次伤害。
+
+--- [沿用官方 opcode] template_independent_action ---
+  draw_to_full                       引用= 1  基线=colorless/scrawl/0         抽牌直到抽满手牌。
+  vuln_all_1                         引用= 1  基线=ironclad/thunderclap/1     给予所有敌人1层易伤。
+
+--- [沿用官方 opcode] template_self_action ---
+  intangible1                        引用= 3  基线=silent/wraithform/0        获得1层无实体。
+  temp_dex2                          引用= 1  基线=silent/anticipate/0        在本回合内获得2点敏捷。
+
+--- [沿用官方 opcode] template_target_action ---
+  target_str_loss2                   引用= 2  基线=necrobinder/sharedfate/1   使目标失去2点力量。
+
+--- [沿用官方 opcode] trigger ---
+  heaven_on_exhaust                  引用= 1  基线=ironclad/darkembrace/0     每当一张牌被消耗时，
+  heaven_on_turn_start               引用= 1  基线=silent/infiniteblades/0    在你的回合开始时，
+  trigger_card_exhausted             引用= 1  基线=ironclad/darkembrace/0     每当有一张牌被消耗时。
+  trigger_card_played                引用= 2  基线=silent/afterimage/0        每当你打出一张牌时。
+  trigger_turn_end                   引用= 1  基线=ironclad/stampede/0        在你的回合结束时。
+  trigger_turn_start                 引用= 1  基线=silent/infiniteblades/0    在你的回合开始时。
